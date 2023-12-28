@@ -9,14 +9,12 @@ const page = () => {
     return (
         <div className='w-full'>
             <div className='w-full h-[100vh] pt-16'>
-                <div className='w-4/5 mx-auto'>
+                <div className='lg:w-4/5 md:w-[90%] w-full mx-auto'>
                     <div>
                         <Heading text={"Create A Movie"} />
                         <CreateContainer />
                     </div>
-
                 </div>
-
             </div>
         </div>
     )

@@ -1,14 +1,31 @@
-import Image from 'next/image'
-import Link from 'next/link'
+// "use client"
+import Container from './Container'
+import axios from "axios";
+import EmptyState from './EmptyState';
+// import { useEffect, useState } from 'react';
 
-export default function Home() {
+
+export async function getServerSideProps() {
+  try {
+    const response = await axios.get('/api/movie/all');
+    console.log(response);
+    return { movies: response.data.movies };
+  } catch (err) {
+    console.error('Error fetching movies:');
+    return { movies: [] };
+  }
+
+};
+
+
+export default async function Home({ movies }) {
+  console.log(movies)
   return (
-    <div className='w-full'>
-      <div className='w-full h-[100vh] flex justify-center items-center'>
-        <div className='flex flex-col items-center'>
-          <h2 className='text-4xl mb-4'>Your Movie List is Empty</h2>
-          <Link href={"movie/create"} className='px-4 py-2 rounded bg-green-800'>Add a new movie</Link>
-        </div>
+    <div className='w-full bg-bgcolor'>
+      <div className='w-full min-h-[100vh]'>
+        {
+          movies.length === 0 ? <EmptyState /> : <Container movies={movies} />
+        }
       </div>
     </div>
   )

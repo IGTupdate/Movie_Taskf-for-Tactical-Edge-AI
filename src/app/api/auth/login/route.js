@@ -33,14 +33,14 @@ export async function POST(req) {
             id: user?._id
         }
 
-        const token = await jwt.sign(tokenData, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = await jwt.sign(tokenData, process.env.JWT_SECRET, { expiresIn: "24h" });
 
         const response = NextResponse.json({
-            message:"LogIn SuccessFully",
-        },{status:200});
+            message: "LogIn SuccessFully",
+        }, { status: 200 });
 
-        response.cookies.set("token", token,{
-            httpOnly:true
+        response.cookies.set("token", token, {
+            httpOnly: true
         });
 
         return response;
