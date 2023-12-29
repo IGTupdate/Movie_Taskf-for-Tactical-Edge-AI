@@ -17,14 +17,20 @@ const getMovie = async (movieId) => {
 export default async function ({ params }) {
     const movie = await getMovie(params.movieId)
     return (
-        <div className='w-full'>
+        <div className='w-full relative pb-20 bg-bgcolor'>
             <div className='w-full h-[100vh] pt-16'>
                 <div className='lg:w-4/5 md:w-[90%] w-full mx-auto'>
                     <div>
                         <Heading text={"Update Movie"} />
-                        <UpdateContainer movie={movie}/>
+                        <UpdateContainer movie={movie} />
                     </div>
                 </div>
+            </div>
+            <div className='absolute bottom-0 w-full h-20'>
+                <img src='/images/ef1.png' className='w-full h-full overflow-hidden bg-cover' />
+            </div>
+            <div className='absolute bottom-0 w-full h-20'>
+                <img src='/images/ef2.png' className='w-full h-full overflow-hidden bg-cover' />
             </div>
         </div>
     )

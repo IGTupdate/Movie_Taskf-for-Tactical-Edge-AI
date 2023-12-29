@@ -12,12 +12,12 @@ const Container = ({ movies }) => {
                 <div className='grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 grid-cols-2 lg:gap-8 md:gap-6 gap-4'>
                     {
                         movies.map((movie, index) => {
-                            return <MovieCard movie={movie} />
+                            return <MovieCard key={index} movie={movie} />
                         })
                     }
                 </div>
             </div>
-            <MoviePagination />
+            <MoviePagination movies={movies} />
         </div>
     )
 }
