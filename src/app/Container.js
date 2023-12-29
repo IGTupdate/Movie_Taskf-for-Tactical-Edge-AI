@@ -1,6 +1,7 @@
 import React from 'react'
 import MovieListHeader from './MovieListHeader'
 import MovieCard from './MovieCard'
+import MoviePagination from './MoviePagination'
 
 const Container = ({ movies }) => {
     return (
@@ -16,7 +17,7 @@ const Container = ({ movies }) => {
                     }
                 </div>
             </div>
-
+            <MoviePagination />
         </div>
     )
 }

@@ -2,24 +2,36 @@
 import Container from './Container'
 import axios from "axios";
 import EmptyState from './EmptyState';
-// import { useEffect, useState } from 'react';
+import { cookies } from 'next/headers'
 
 
-export async function getServerSideProps() {
+export async function getMovies(token, page) {
+
   try {
-    const response = await axios.get('/api/movie/all');
-    console.log(response);
-    return { movies: response.data.movies };
+    const response = await axios.get(`http://localhost:3000/api/movie/all?page=${page}`, {
+      withCredentials: true,
+      headers: {
+        Cookie: `token=${token}`
+      }
+    });
+
+    console.log(response.data);
+    return response.data.movies
   } catch (err) {
     console.error('Error fetching movies:');
-    return { movies: [] };
+    return []
   }
 
 };
 
 
-export default async function Home({ movies }) {
-  console.log(movies)
+export default async function Home({ searchParams }) {
+
+  const token = cookies().get("token")?.value || "-";
+  const page = searchParams?.page || 1;
+  let movies = await getMovies(token, page);
+
+  // movies = []
   return (
     <div className='w-full bg-bgcolor'>
       <div className='w-full min-h-[100vh]'>

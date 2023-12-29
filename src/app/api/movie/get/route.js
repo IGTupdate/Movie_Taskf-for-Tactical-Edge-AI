@@ -8,18 +8,14 @@ import { NextResponse } from "next/server";
 connect();
 export async function GET(req) {
     try {
-        const user = await getDataFromToken(req);
-
-        const page = Number(getSearchParams(req.url, "page")) || 1;
-
-        const limit = 8;
-        const skip = (page - 1) * limit;
-
-        const movies = await Movie.find({ userId: user?.id }).skip(skip).limit(limit);
+       
+        const movieId = getSearchParams(req.url, "movieId");
+        
+        const movie = await Movie.findById(movieId)
 
 
         return NextResponse.json({
-            movies
+            movie
         }, { status: 200 })
 
     } catch (err) {
